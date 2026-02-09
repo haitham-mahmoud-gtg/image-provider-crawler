@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Provider Crawler Report</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --bg: #f9fafb;
+      --border: #e5e7eb;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), #1e40af);
+      color: white;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .meta {
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+      background: #f3f4f6;
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 6px;
+      border-left: 3px solid var(--primary);
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 0.25rem;
+    }
+    .stat-value {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: #111827;
+    }
+    section {
+      padding: 2rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #111827;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th {
+      background: #f3f4f6;
+      padding: 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      color: #374151;
+      border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    tr:hover {
+      background: #f9fafb;
+    }
+    .url-cell {
+      max-width: 400px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .url-cell a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .url-cell a:hover {
+      text-decoration: underline;
+    }
+    .font-mono {
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 0.85rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .badge-ok {
+      background: #d1fae5;
+      color: var(--success);
+    }
+    .badge-bad {
+      background: #fee2e2;
+      color: var(--danger);
+    }
+    .latency-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .latency-val {
+      min-width: 60px;
+      font-weight: 600;
+      color: #374151;
+    }
+    .latency-bar-bg {
+      flex: 1;
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .latency-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--success), #fbbf24);
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📊 Image Provider Crawler Report</h1>
+      <div class="meta">Generated at: {{GENERATED_AT}}</div>
+    </header>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-label">Total Pages Crawled</div>
+        <div class="stat-value">{{TOTAL_PAGES}}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Cloudinary Requests</div>
+        <div class="stat-value">{{TOTAL_CLOUD_REQ}}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">PeakHour Requests</div>
+        <div class="stat-value">{{TOTAL_PEAK_REQ}}</div>
+      </div>
+    </div>
+
+    <section>
+      <h2>Summary by Page</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>URL</th>
+            <th style="text-align:center">DOM Cloudinary</th>
+            <th style="text-align:center">DOM PeakHour</th>
+            <th style="text-align:center">Net Cloudinary</th>
+            <th style="text-align:center">Net PeakHour</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{SUMMARY_ROWS}}
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>HTTP Sanity Checks</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Status</th>
+            <th>Latency (ms)</th>
+            <th>Content-Type</th>
+            <th style="text-align:right">Content-Length</th>
+            <th>URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{SANITY_ROWS}}
+        </tbody>
+      </table>
+    </section>
+  </div>
+</body>
+</html>
