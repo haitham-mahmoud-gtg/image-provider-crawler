@@ -1,7 +1,7 @@
 // src/extractors.js
 
 const CLOUDINARY_ANY = /https?:\/\/[^"'\s)]*cloudinary\.com\/[^"'\s)]+/gi;
-const PEAKHOUR_ANY   = /https?:\/\/[^"'\s)]*peakhour[^"'\s)]+/gi;
+const GTAU_IMAGES    = /https?:\/\/images\.[^"'\s)]*\.gtau\.net\/[^"'\s)]+/gi;
 
 function uniqueMatches(text, regex) {
   return [...new Set(text.match(regex) || [])];
@@ -10,7 +10,7 @@ function uniqueMatches(text, regex) {
 function extractFromDOM(outerHTML) {
   return {
     cloudinary: uniqueMatches(outerHTML, CLOUDINARY_ANY),
-    peakhour:   uniqueMatches(outerHTML, PEAKHOUR_ANY),
+    gtauImages: uniqueMatches(outerHTML, GTAU_IMAGES),
   };
 }
 

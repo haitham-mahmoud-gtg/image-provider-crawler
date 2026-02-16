@@ -7,12 +7,12 @@ function buildSummaryRows(pages) {
         <a href="${p.url}" target="_blank">${p.url}</a>
       </td>
       <td style="text-align:center;font-weight:bold">${p.domCloudinary.length}</td>
-      <td style="text-align:center;font-weight:bold">${p.domPeakHour.length}</td>
       <td style="text-align:center;font-weight:bold;color:var(--primary)">
         ${p.reqCloudinary.length}
       </td>
-      <td style="text-align:center;font-weight:bold">
-        ${p.reqPeakHour.length}
+      <td style="text-align:center;font-weight:bold">${p.domGtauImages.length}</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        ${p.reqGtauImages.length}
       </td>
     </tr>
   `).join("");

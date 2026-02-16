@@ -18,13 +18,13 @@ async function crawlPage(url, browser) {
 
   const network = {
     cloudinary: new Set(),
-    peakhour: new Set(),
+    gtauImages: new Set(),
   };
 
   page.on("request", (req) => {
     const u = req.url().toLowerCase();
     if (u.includes("cloudinary")) network.cloudinary.add(req.url());
-    if (u.includes("peakhour")) network.peakhour.add(req.url());
+    if (u.includes("images.") && u.includes(".gtau.net")) network.gtauImages.add(req.url());
   });
 
   try {
@@ -38,7 +38,7 @@ async function crawlPage(url, browser) {
       outerHTML,
       network: {
         cloudinary: [...network.cloudinary],
-        peakhour: [...network.peakhour],
+        gtauImages: [...network.gtauImages],
       },
     };
   } finally {

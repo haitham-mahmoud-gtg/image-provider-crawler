@@ -9,9 +9,10 @@ function renderReport(templatePath, outputPath, data) {
     .replace("{{GENERATED_AT}}", data.generatedAt)
     .replace("{{TOTAL_PAGES}}", data.totalPages)
     .replace("{{TOTAL_CLOUD_REQ}}", data.totalCloudReq)
-    .replace("{{TOTAL_PEAK_REQ}}", data.totalPeakReq)
+    .replace("{{TOTAL_GTAU_REQ}}", data.totalGtauReq)
     .replace("{{SUMMARY_ROWS}}", data.summaryRows)
-    .replace("{{SANITY_ROWS}}", data.sanityRows);
+    .replace("{{CLOUDINARY_SANITY_ROWS}}", data.cloudinarySanityRows)
+    .replace("{{GTAU_SANITY_ROWS}}", data.gtauSanityRows);
 
   fs.writeFileSync(outputPath, html, "utf8");
 }

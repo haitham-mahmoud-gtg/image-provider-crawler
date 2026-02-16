@@ -31,9 +31,9 @@ const urls = fs.readFileSync(path.join(__dirname, "..", "urls.txt"), "utf8")
           return {
             url,
             domCloudinary: dom.cloudinary,
-            domPeakHour: dom.peakhour,
+            domGtauImages: dom.gtauImages,
             reqCloudinary: result.network.cloudinary,
-            reqPeakHour: result.network.peakhour,
+            reqGtauImages: result.network.gtauImages,
             dom, // Keep for sanity checks
             error: null,
           };
@@ -42,10 +42,10 @@ const urls = fs.readFileSync(path.join(__dirname, "..", "urls.txt"), "utf8")
           return {
             url,
             domCloudinary: [],
-            domPeakHour: [],
+            domGtauImages: [],
             reqCloudinary: [],
-            reqPeakHour: [],
-            dom: { cloudinary: [], peakhour: [] },
+            reqGtauImages: [],
+            dom: { cloudinary: [], gtauImages: [] },
             error: error.message,
           };
         }
@@ -57,40 +57,54 @@ const urls = fs.readFileSync(path.join(__dirname, "..", "urls.txt"), "utf8")
 
     // Collect all sanity check URLs (cap per page)
     const sanityChecks = [];
+    // Separate sanity checks by provider
+    const cloudinarySanityChecks = [];
+    const gtauSanityChecks = [];
+    
     for (const page of crawlResults) {
       for (const u of page.dom.cloudinary.slice(0, 20)) {
-        sanityChecks.push({ provider: "Cloudinary", url: u });
+        cloudinarySanityChecks.push({ provider: "Cloudinary", url: u });
       }
-      for (const u of page.dom.peakhour.slice(0, 20)) {
-        sanityChecks.push({ provider: "PeakHour", url: u });
+      for (const u of page.dom.gtauImages.slice(0, 20)) {
+        gtauSanityChecks.push({ provider: "GTAU Images", url: u });
       }
     }
 
-    // Run all sanity checks in parallel
-    console.log(`🔍 Running ${sanityChecks.length} HTTP sanity checks...`);
-    const sanityResults = await Promise.all(
-      sanityChecks.map(async ({ provider, url }) => ({
+    // Run sanity checks for each provider
+    console.log(`🔍 Running ${cloudinarySanityChecks.length} Cloudinary sanity checks...`);
+    const cloudinarySanityResults = await Promise.all(
+      cloudinarySanityChecks.map(async ({ provider, url }) => ({
+        provider,
+        ...(await httpSanity(url)),
+      }))
+    );
+    
+    console.log(`🔍 Running ${gtauSanityChecks.length} GTAU Images sanity checks...`);
+    const gtauSanityResults = await Promise.all(
+      gtauSanityChecks.map(async ({ provider, url }) => ({
         provider,
         ...(await httpSanity(url)),
       }))
     );
     console.log(`✅ Sanity checks completed\n`);
 
-  const summaryRows = buildSummaryRows(pages);
-  const sanityRows = buildSanityRows(sanityResults);
+    const summaryRows = buildSummaryRows(pages);
+    const cloudinarySanityRows = buildSanityRows(cloudinarySanityResults);
+    const gtauSanityRows = buildSanityRows(gtauSanityResults);
 
-  renderReport(
-    path.join(__dirname, "template.html"),
-    path.join(__dirname, "..", "report.html"),
-    {
-      generatedAt: new Date().toISOString(),
-      totalPages: pages.length,
-      totalCloudReq: pages.reduce((a,p)=>a+p.reqCloudinary.length,0),
-      totalPeakReq: pages.reduce((a,p)=>a+p.reqPeakHour.length,0),
-      summaryRows,
-      sanityRows
-    }
-  );
+    renderReport(
+      path.join(__dirname, "template.html"),
+      path.join(__dirname, "..", "report.html"),
+      {
+        generatedAt: new Date().toISOString(),
+        totalPages: pages.length,
+        totalCloudReq: pages.reduce((a,p)=>a+p.reqCloudinary.length,0),
+        totalGtauReq: pages.reduce((a,p)=>a+p.reqGtauImages.length,0),
+        summaryRows,
+        cloudinarySanityRows,
+        gtauSanityRows
+      }
+    );
 
     console.log("✅ report.html generated");
   } finally {

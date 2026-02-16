@@ -171,8 +171,8 @@
         <div class="stat-value">{{TOTAL_CLOUD_REQ}}</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">PeakHour Requests</div>
-        <div class="stat-value">{{TOTAL_PEAK_REQ}}</div>
+        <div class="stat-label">GTAU Images Requests</div>
+        <div class="stat-value">{{TOTAL_GTAU_REQ}}</div>
       </div>
     </div>
 
@@ -183,9 +183,9 @@
           <tr>
             <th>URL</th>
             <th style="text-align:center">DOM Cloudinary</th>
-            <th style="text-align:center">DOM PeakHour</th>
             <th style="text-align:center">Net Cloudinary</th>
-            <th style="text-align:center">Net PeakHour</th>
+            <th style="text-align:center">DOM GTAU Images</th>
+            <th style="text-align:center">Net GTAU Images</th>
           </tr>
         </thead>
         <tbody>
@@ -195,7 +195,7 @@
     </section>
 
     <section>
-      <h2>HTTP Sanity Checks</h2>
+      <h2>🔵 Cloudinary - HTTP Sanity Checks</h2>
       <table>
         <thead>
           <tr>
@@ -208,7 +208,26 @@
           </tr>
         </thead>
         <tbody>
-          {{SANITY_ROWS}}
+          {{CLOUDINARY_SANITY_ROWS}}
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>🟢 GTAU Images - HTTP Sanity Checks</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Status</th>
+            <th>Latency (ms)</th>
+            <th>Content-Type</th>
+            <th style="text-align:right">Content-Length</th>
+            <th>URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{GTAU_SANITY_ROWS}}
         </tbody>
       </table>
     </section>
