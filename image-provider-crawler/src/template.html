@@ -152,7 +152,111 @@
       background: linear-gradient(90deg, var(--success), #fbbf24);
       transition: width 0.3s ease;
     }
+    .location-badge {
+      display: inline-block;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      font-family: monospace;
+    }
+    .location-header {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+    .location-body {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    .location-both {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    .expand-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: #6b7280;
+      padding: 0 0.5rem 0 0;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+    .expand-btn:hover {
+      color: var(--primary);
+    }
+    .expand-btn.expanded {
+      transform: rotate(90deg);
+    }
+    .detail-row {
+      background: #f9fafb;
+    }
+    .detail-content {
+      padding: 1.5rem;
+      border-top: 2px solid #e5e7eb;
+    }
+    .detail-section {
+      margin-bottom: 1.5rem;
+    }
+    .detail-section:last-child {
+      margin-bottom: 0;
+    }
+    .detail-section h4 {
+      font-size: 1rem;
+      color: #111827;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .url-list-section {
+      margin-bottom: 1rem;
+    }
+    .url-list-header {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      background: #fff;
+      border-radius: 4px;
+      border-left: 3px solid #3b82f6;
+    }
+    .url-list {
+      list-style: none;
+      margin-left: 1rem;
+      padding-left: 0;
+    }
+    .url-item {
+      padding: 0.4rem 0.5rem;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 0.8rem;
+      border-bottom: 1px solid #f3f4f6;
+      word-break: break-all;
+    }
+    .url-item:last-child {
+      border-bottom: none;
+    }
+    .url-item a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+    .url-item a:hover {
+      text-decoration: underline;
+    }
   </style>
+  <script>
+    function toggleDetails(id) {
+      const row = document.getElementById(id);
+      const btn = event.target;
+      if (row.style.display === 'none') {
+        row.style.display = 'table-row';
+        btn.classList.add('expanded');
+      } else {
+        row.style.display = 'none';
+        btn.classList.remove('expanded');
+      }
+    }
+  </script>
 </head>
 <body>
   <div class="container">
@@ -178,6 +282,18 @@
 
     <section>
       <h2>Summary by Page</h2>
+      <div style="background: #f0f9ff; border-left: 3px solid #0284c7; padding: 1rem; margin-bottom: 1rem; border-radius: 4px;">
+        <p style="font-size: 0.9rem; color: #0c4a6e; margin-bottom: 0.5rem; font-weight: 600;">
+          📖 Understanding the Columns:
+        </p>
+        <ul style="font-size: 0.85rem; color: #374151; margin-left: 1.5rem; line-height: 1.8;">
+          <li><strong>DOM</strong> = URLs found in the HTML source code (static content)</li>
+          <li><strong>Net</strong> = URLs detected in actual network requests (includes dynamically loaded images)</li>
+          <li>Location badges: <span class="location-badge location-header">H</span> = Header only,
+              <span class="location-badge location-body">B</span> = Body only,
+              <span class="location-badge location-both">H+B</span> = Both sections</li>
+        </ul>
+      </div>
       <table>
         <thead>
           <tr>

@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Provider Crawler Report</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --bg: #f9fafb;
+      --border: #e5e7eb;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), #1e40af);
+      color: white;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .meta {
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+      background: #f3f4f6;
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 6px;
+      border-left: 3px solid var(--primary);
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 0.25rem;
+    }
+    .stat-value {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: #111827;
+    }
+    section {
+      padding: 2rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #111827;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th {
+      background: #f3f4f6;
+      padding: 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      color: #374151;
+      border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    tr:hover {
+      background: #f9fafb;
+    }
+    .url-cell {
+      max-width: 400px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .url-cell a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .url-cell a:hover {
+      text-decoration: underline;
+    }
+    .font-mono {
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 0.85rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .badge-ok {
+      background: #d1fae5;
+      color: var(--success);
+    }
+    .badge-bad {
+      background: #fee2e2;
+      color: var(--danger);
+    }
+    .latency-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .latency-val {
+      min-width: 60px;
+      font-weight: 600;
+      color: #374151;
+    }
+    .latency-bar-bg {
+      flex: 1;
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .latency-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--success), #fbbf24);
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📊 Image Provider Crawler Report</h1>
+      <div class="meta">Generated at: 2026-02-16T01:13:26.453Z</div>
+    </header>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-label">Total Pages Crawled</div>
+        <div class="stat-value">8</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Cloudinary Requests</div>
+        <div class="stat-value">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">GTAU Images Requests</div>
+        <div class="stat-value">8</div>
+      </div>
+    </div>
+
+    <section>
+      <h2>Summary by Page</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>URL</th>
+            <th style="text-align:center">DOM Cloudinary</th>
+            <th style="text-align:center">Net Cloudinary</th>
+            <th style="text-align:center">DOM GTAU Images</th>
+            <th style="text-align:center">Net GTAU Images</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/t-settings.html" target="_blank">https://www.staging.p.nonprod.gtau.net/t-settings.html</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        0
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        0
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/s-ad/the-rocks/sheds-storage/test-shed-garden-shed/1300524484?posted=true" target="_blank">https://www.staging.p.nonprod.gtau.net/s-ad/the-rocks/sheds-storage/test-shed-garden-shed/1300524484?posted=true</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">1</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        0
+      </td>
+      <td style="text-align:center;font-weight:bold">16</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        3
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/web/manage-ads?c=1&show=ACTIVE&pageNum=1" target="_blank">https://www.staging.p.nonprod.gtau.net/web/manage-ads?c=1&show=ACTIVE&pageNum=1</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        0
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        0
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/s-ad/the-rocks/sheds-storage/test-shed-garden-shed/1300524484" target="_blank">https://www.staging.p.nonprod.gtau.net/s-ad/the-rocks/sheds-storage/test-shed-garden-shed/1300524484</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">1</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        0
+      </td>
+      <td style="text-align:center;font-weight:bold">16</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        3
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/m-messages.html" target="_blank">https://www.staging.p.nonprod.gtau.net/m-messages.html</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        0
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        0
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/m-messages.html#4199675739173_1300447198" target="_blank">https://www.staging.p.nonprod.gtau.net/m-messages.html#4199675739173_1300447198</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        0
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        0
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/s-watchlist.html" target="_blank">https://www.staging.p.nonprod.gtau.net/s-watchlist.html</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        0
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        0
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/web/s-user/4199675739173" target="_blank">https://www.staging.p.nonprod.gtau.net/web/s-user/4199675739173</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        0
+      </td>
+      <td style="text-align:center;font-weight:bold">2</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        2
+      </td>
+    </tr>
+  
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>🔵 Cloudinary - HTTP Sanity Checks</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Status</th>
+            <th>Latency (ms)</th>
+            <th>Content-Type</th>
+            <th style="text-align:right">Content-Length</th>
+            <th>URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">167</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:56%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/png</td>
+        <td style="text-align:right;font-weight:500">456116</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/s--tG62mYkA--/t_$_35/gumtree/home_garden_minion.png" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/s--tG62mYkA--/t_$_35/gumtree/home_garden_minion.png</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">408</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/png</td>
+        <td style="text-align:right;font-weight:500">456116</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/s--tG62mYkA--/t_$_35/gumtree/home_garden_minion.png" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/s--tG62mYkA--/t_$_35/gumtree/home_garden_minion.png</a>
+        </td>
+      </tr>
+    
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>🟢 GTAU Images - HTTP Sanity Checks</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Status</th>
+            <th>Latency (ms)</th>
+            <th>Content-Type</th>
+            <th style="text-align:right">Content-Length</th>
+            <th>URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">651</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">24494</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_58/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_58/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">777</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">123028</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_s-l1600/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_s-l1600/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">327</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/png</td>
+        <td style="text-align:right;font-weight:500">6474</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_74/gumtree/bfd05866-bf1e-4174-924a-166a52004ff1" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_74/gumtree/bfd05866-bf1e-4174-924a-166a52004ff1</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">438</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">7152</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">552</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">12846</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">673</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">35651</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">749</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">7207</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">844</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">13867</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">612</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">32515</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1109</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">11444</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1039</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">22797</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">670</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">72528</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">319</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">14300</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/2f7b651a-ad06-469f-bf50-55135cd04f6a.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/2f7b651a-ad06-469f-bf50-55135cd04f6a.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1078</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">16796</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/2f7b651a-ad06-469f-bf50-55135cd04f6a.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/2f7b651a-ad06-469f-bf50-55135cd04f6a.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">811</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">55198</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/2f7b651a-ad06-469f-bf50-55135cd04f6a.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/2f7b651a-ad06-469f-bf50-55135cd04f6a.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1494</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">16383</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/332455c6%2Dacaa%2D4583%2D8fbd%2D394bcc089208.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/332455c6%2Dacaa%2D4583%2D8fbd%2D394bcc089208.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">635</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">24494</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_58/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_58/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1178</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">123028</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_s-l1600/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_s-l1600/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1186</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/png</td>
+        <td style="text-align:right;font-weight:500">6474</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_74/gumtree/bfd05866-bf1e-4174-924a-166a52004ff1" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_74/gumtree/bfd05866-bf1e-4174-924a-166a52004ff1</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1428</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">7152</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">790</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">12846</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1183</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">35651</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">393</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">5368</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">747</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">10161</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1335</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">32515</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">775</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">9541</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">596</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">22797</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">603</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">72528</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">258</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:86%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">14300</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/2f7b651a-ad06-469f-bf50-55135cd04f6a.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/2f7b651a-ad06-469f-bf50-55135cd04f6a.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1255</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">12772</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/2f7b651a-ad06-469f-bf50-55135cd04f6a.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/2f7b651a-ad06-469f-bf50-55135cd04f6a.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">2002</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">55198</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/2f7b651a-ad06-469f-bf50-55135cd04f6a.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_20/gumtree/2f7b651a-ad06-469f-bf50-55135cd04f6a.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1871</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">16383</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/332455c6%2Dacaa%2D4583%2D8fbd%2D394bcc089208.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/332455c6%2Dacaa%2D4583%2D8fbd%2D394bcc089208.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1859</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/png</td>
+        <td style="text-align:right;font-weight:500">6474</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_74/gumtree/bfd05866-bf1e-4174-924a-166a52004ff1" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_74/gumtree/bfd05866-bf1e-4174-924a-166a52004ff1</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">2135</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">35651</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_s-l800/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_s-l800/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg</a>
+        </td>
+      </tr>
+    
+        </tbody>
+      </table>
+    </section>
+  </div>
+</body>
+</html>

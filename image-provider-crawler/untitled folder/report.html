@@ -1,0 +1,2900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Provider Crawler Report</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --bg: #f9fafb;
+      --border: #e5e7eb;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), #1e40af);
+      color: white;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .meta {
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+      background: #f3f4f6;
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 6px;
+      border-left: 3px solid var(--primary);
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 0.25rem;
+    }
+    .stat-value {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: #111827;
+    }
+    section {
+      padding: 2rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #111827;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th {
+      background: #f3f4f6;
+      padding: 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      color: #374151;
+      border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    tr:hover {
+      background: #f9fafb;
+    }
+    .url-cell {
+      max-width: 400px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .url-cell a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .url-cell a:hover {
+      text-decoration: underline;
+    }
+    .font-mono {
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 0.85rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .badge-ok {
+      background: #d1fae5;
+      color: var(--success);
+    }
+    .badge-bad {
+      background: #fee2e2;
+      color: var(--danger);
+    }
+    .latency-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .latency-val {
+      min-width: 60px;
+      font-weight: 600;
+      color: #374151;
+    }
+    .latency-bar-bg {
+      flex: 1;
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .latency-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--success), #fbbf24);
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📊 Image Provider Crawler Report</h1>
+      <div class="meta">Generated at: 2026-02-16T01:14:42.902Z</div>
+    </header>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-label">Total Pages Crawled</div>
+        <div class="stat-value">9</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Cloudinary Requests</div>
+        <div class="stat-value">81</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">GTAU Images Requests</div>
+        <div class="stat-value">18</div>
+      </div>
+    </div>
+
+    <section>
+      <h2>Summary by Page</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>URL</th>
+            <th style="text-align:center">DOM Cloudinary</th>
+            <th style="text-align:center">Net Cloudinary</th>
+            <th style="text-align:center">DOM GTAU Images</th>
+            <th style="text-align:center">Net GTAU Images</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/" target="_blank">https://www.staging.p.nonprod.gtau.net/</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">20</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        21
+      </td>
+      <td style="text-align:center;font-weight:bold">2</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        4
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/cars" target="_blank">https://www.staging.p.nonprod.gtau.net/cars</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        3
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        5
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/s-home-garden/c18397" target="_blank">https://www.staging.p.nonprod.gtau.net/s-home-garden/c18397</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">6</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        1
+      </td>
+      <td style="text-align:center;font-weight:bold">5</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        0
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/pets/" target="_blank">https://www.staging.p.nonprod.gtau.net/pets/</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">83</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        17
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        0
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/jobs" target="_blank">https://www.staging.p.nonprod.gtau.net/jobs</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">8</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        4
+      </td>
+      <td style="text-align:center;font-weight:bold">12</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        6
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/real-estate/" target="_blank">https://www.staging.p.nonprod.gtau.net/real-estate/</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">30</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        27
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        0
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/s-services-for-hire/c9303" target="_blank">https://www.staging.p.nonprod.gtau.net/s-services-for-hire/c9303</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">7</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        1
+      </td>
+      <td style="text-align:center;font-weight:bold">6</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        2
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/s-mazda/k0" target="_blank">https://www.staging.p.nonprod.gtau.net/s-mazda/k0</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">24</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        2
+      </td>
+      <td style="text-align:center;font-weight:bold">0</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        0
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="url-cell font-mono">
+        <a href="https://www.staging.p.nonprod.gtau.net/web/listing/cars-vans-utes/1299855443" target="_blank">https://www.staging.p.nonprod.gtau.net/web/listing/cars-vans-utes/1299855443</a>
+      </td>
+      <td style="text-align:center;font-weight:bold">14</td>
+      <td style="text-align:center;font-weight:bold;color:var(--primary)">
+        5
+      </td>
+      <td style="text-align:center;font-weight:bold">1</td>
+      <td style="text-align:center;font-weight:bold;color:var(--success)">
+        1
+      </td>
+    </tr>
+  
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>🔵 Cloudinary - HTTP Sanity Checks</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Status</th>
+            <th>Latency (ms)</th>
+            <th>Content-Type</th>
+            <th style="text-align:right">Content-Length</th>
+            <th>URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">723</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">47500</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/move/e7a83931-7a12-4d48-a309-a3ffed8e5d1e" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/move/e7a83931-7a12-4d48-a309-a3ffed8e5d1e</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">212</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:71%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">28002</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/move/4ed8a6b7-7412-46c0-858a-709018537d16" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/move/4ed8a6b7-7412-46c0-858a-709018537d16</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">210</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:70%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">24619</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/15d8546d-5414-46b8-908d-58d2540e5f13.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/15d8546d-5414-46b8-908d-58d2540e5f13.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">263</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:88%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">16628</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/8cb0c002-cc33-40f4-9cfd-a3bf16b3e0f0.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/8cb0c002-cc33-40f4-9cfd-a3bf16b3e0f0.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">209</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:70%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">16628</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/364eef40-4e8c-4381-a861-e3825518a8cc.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/364eef40-4e8c-4381-a861-e3825518a8cc.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">237</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:79%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">16628</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/b3ff5e85-61b3-4cfe-b6a1-49d4fc7665d6.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/b3ff5e85-61b3-4cfe-b6a1-49d4fc7665d6.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">237</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:79%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">16628</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/f4bcd1ed-87f6-4baf-99e5-14ed414ebbc3.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/f4bcd1ed-87f6-4baf-99e5-14ed414ebbc3.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">225</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:75%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">16628</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/452f24c4-57d9-4f98-94cb-21b23f3f1e6d.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/452f24c4-57d9-4f98-94cb-21b23f3f1e6d.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">326</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/png</td>
+        <td style="text-align:right;font-weight:500">834711</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/s--658Q9zJF--/v1756373312/gumtree/jobs_minion.png" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/s--658Q9zJF--/v1756373312/gumtree/jobs_minion.png</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">205</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:68%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/png</td>
+        <td style="text-align:right;font-weight:500">518682</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/s--nXUbb9uh--/t_$_s-l400/gumtree/automotive_minion.png" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/s--nXUbb9uh--/t_$_s-l400/gumtree/automotive_minion.png</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">181</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:60%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/png</td>
+        <td style="text-align:right;font-weight:500">17747</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/4e796bac-a6e2-43ae-b85b-480ac8a4a84f.png" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/4e796bac-a6e2-43ae-b85b-480ac8a4a84f.png</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">223</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:74%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">47500</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/move/e7a83931-7a12-4d48-a309-a3ffed8e5d1e" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/move/e7a83931-7a12-4d48-a309-a3ffed8e5d1e</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">233</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:78%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">28002</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/move/4ed8a6b7-7412-46c0-858a-709018537d16" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/move/4ed8a6b7-7412-46c0-858a-709018537d16</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">398</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">12867</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/15d8546d-5414-46b8-908d-58d2540e5f13.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/15d8546d-5414-46b8-908d-58d2540e5f13.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">187</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:62%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">text/plain; charset=utf-8</td>
+        <td style="text-align:right;font-weight:500">9</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/dbd4e1e1-b12a-46bf-9f6b-89deed88d6e1.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/dbd4e1e1-b12a-46bf-9f6b-89deed88d6e1.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">775</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">16628</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/8cb0c002-cc33-40f4-9cfd-a3bf16b3e0f0.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/8cb0c002-cc33-40f4-9cfd-a3bf16b3e0f0.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">990</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">16628</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/364eef40-4e8c-4381-a861-e3825518a8cc.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/364eef40-4e8c-4381-a861-e3825518a8cc.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">218</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:73%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">16628</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/b3ff5e85-61b3-4cfe-b6a1-49d4fc7665d6.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/b3ff5e85-61b3-4cfe-b6a1-49d4fc7665d6.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">841</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">16628</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/f4bcd1ed-87f6-4baf-99e5-14ed414ebbc3.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/f4bcd1ed-87f6-4baf-99e5-14ed414ebbc3.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">180</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:60%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">16628</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/452f24c4-57d9-4f98-94cb-21b23f3f1e6d.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/452f24c4-57d9-4f98-94cb-21b23f3f1e6d.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">675</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/gif</td>
+        <td style="text-align:right;font-weight:500">0</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">3342</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/gif</td>
+        <td style="text-align:right;font-weight:500">-</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/gumtree/b0b75401-b218-4722-a93f-597fc69b9b84.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/gumtree/b0b75401-b218-4722-a93f-597fc69b9b84.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1886</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/gif</td>
+        <td style="text-align:right;font-weight:500">-</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_74/gumtree/b0b75401-b218-4722-a93f-597fc69b9b84.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_74/gumtree/b0b75401-b218-4722-a93f-597fc69b9b84.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">2047</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/gif</td>
+        <td style="text-align:right;font-weight:500">-</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_74/gumtree/25a899de-6ce3-4429-ad14-243d54a8b955.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_74/gumtree/25a899de-6ce3-4429-ad14-243d54a8b955.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">231</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:77%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">text/plain; charset=utf-8</td>
+        <td style="text-align:right;font-weight:500">9</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">230</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:77%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/gif</td>
+        <td style="text-align:right;font-weight:500">0</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">604</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">22831</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/367bc3d5-57a5-4528-835a-f369ee3e4c85.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/367bc3d5-57a5-4528-835a-f369ee3e4c85.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">648</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">20600</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/d78ffea1-3e8b-4b18-8e73-68c89b0a0cbb.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/d78ffea1-3e8b-4b18-8e73-68c89b0a0cbb.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1152</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">43032</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/f454fde0-b808-40dc-a985-057ff1e7241f.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/f454fde0-b808-40dc-a985-057ff1e7241f.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">296</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:99%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">40678</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/5283dd6a-912a-43c9-bf3c-490a5197090a.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/5283dd6a-912a-43c9-bf3c-490a5197090a.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">277</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:92%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">29274</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/4fcab533-8e1d-45e6-b5f3-03e7659c1ed9.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/4fcab533-8e1d-45e6-b5f3-03e7659c1ed9.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">295</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:98%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">80388</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/0c68fb1c-226c-4a42-8ae4-8390151f7c36.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/0c68fb1c-226c-4a42-8ae4-8390151f7c36.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">886</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">73553</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/6430bed0-713e-44df-9821-cbf7c3dda183.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/6430bed0-713e-44df-9821-cbf7c3dda183.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">514</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">35830</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/d650b2b8-4847-4532-8aa3-da11d5ffc72b.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/d650b2b8-4847-4532-8aa3-da11d5ffc72b.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">292</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:97%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">73906</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/18e13c07-8faf-4f3d-a28d-98c0bd03844a.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/18e13c07-8faf-4f3d-a28d-98c0bd03844a.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">575</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">113669</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/4f933dea-45bf-4ee5-bb39-5cb4bdc22ed3.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/4f933dea-45bf-4ee5-bb39-5cb4bdc22ed3.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">308</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">48078</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/fa52623e-d2a1-4d5b-be50-7d8dbe96dcd1.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/fa52623e-d2a1-4d5b-be50-7d8dbe96dcd1.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1406</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">45910</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/376607ea-e180-4e1e-b058-adacbf8bc88a.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/376607ea-e180-4e1e-b058-adacbf8bc88a.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">925</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">50873</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/7b977f53-d297-46f3-bbd5-a2c8e07bfca8.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/7b977f53-d297-46f3-bbd5-a2c8e07bfca8.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">560</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">31217</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/2122b7e7-b913-4d0a-ad99-4fe7b8c4b4e6.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/2122b7e7-b913-4d0a-ad99-4fe7b8c4b4e6.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1058</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">24881</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/9a174701-faa7-4382-8e36-7edcb3273972.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/9a174701-faa7-4382-8e36-7edcb3273972.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">643</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">14764</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/d3ad267c-20c6-41fc-8ab3-53eabdce5233.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/d3ad267c-20c6-41fc-8ab3-53eabdce5233.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">594</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">80526</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/ad90dd7b-6132-4969-b8f0-0c4d3908041d.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/ad90dd7b-6132-4969-b8f0-0c4d3908041d.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">844</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">92894</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/9b805c28-4ed0-4f30-a647-82db317ef821.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/9b805c28-4ed0-4f30-a647-82db317ef821.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">459</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">24072</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/39aede54-63c9-4852-a21a-c958c8150c56.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/39aede54-63c9-4852-a21a-c958c8150c56.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">373</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">23620</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/de5aa297-ddc2-4dd4-9f80-baa1b7c1d6e4.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/de5aa297-ddc2-4dd4-9f80-baa1b7c1d6e4.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">949</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">text/plain; charset=utf-8</td>
+        <td style="text-align:right;font-weight:500">9</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/dbd4e1e1-b12a-46bf-9f6b-89deed88d6e1.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/dbd4e1e1-b12a-46bf-9f6b-89deed88d6e1.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">617</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/gif</td>
+        <td style="text-align:right;font-weight:500">0</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/gumtree/dbd4e1e1-b12a-46bf-9f6b-89deed88d6e1.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/gumtree/dbd4e1e1-b12a-46bf-9f6b-89deed88d6e1.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">637</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/gif</td>
+        <td style="text-align:right;font-weight:500">0</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">882</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">text/plain; charset=utf-8</td>
+        <td style="text-align:right;font-weight:500">9</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">558</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/png</td>
+        <td style="text-align:right;font-weight:500">493140</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/s--658Q9zJF--/t_$_75/gumtree/jobs_minion.png" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/s--658Q9zJF--/t_$_75/gumtree/jobs_minion.png</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">466</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/png</td>
+        <td style="text-align:right;font-weight:500">419921</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/s--658Q9zJF--/t_$_35/gumtree/jobs_minion.png" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/s--658Q9zJF--/t_$_35/gumtree/jobs_minion.png</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">650</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">75382</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/fc8e1b6c-5c92-40e0-a788-319f2c91d9b0.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/fc8e1b6c-5c92-40e0-a788-319f2c91d9b0.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">364</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">51288</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/gumtree/fc8e1b6c-5c92-40e0-a788-319f2c91d9b0.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/gumtree/fc8e1b6c-5c92-40e0-a788-319f2c91d9b0.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">363</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">51484</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/45851ea6-82ae-4ce0-b75e-d30a99cc5570.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/45851ea6-82ae-4ce0-b75e-d30a99cc5570.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">411</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">46445</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/4f2e1b1f-7db6-40e1-bac6-96d9c096ea3c.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/4f2e1b1f-7db6-40e1-bac6-96d9c096ea3c.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">513</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">94638</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/7a2373f8-3cb1-4392-bd68-3014859addfd" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/7a2373f8-3cb1-4392-bd68-3014859addfd</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">887</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">70955</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/71f79d46-feb0-4db9-872d-b55cf6af1d83" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/71f79d46-feb0-4db9-872d-b55cf6af1d83</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">564</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">51618</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/8f69c96f-eac2-4f60-9066-e6c3521011bd" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/8f69c96f-eac2-4f60-9066-e6c3521011bd</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">327</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">106917</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/79722913-777d-4abe-8d9c-cf4141c7a4f3" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/79722913-777d-4abe-8d9c-cf4141c7a4f3</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">315</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/webp</td>
+        <td style="text-align:right;font-weight:500">42510</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/c7097ebe-23a3-4679-9a88-e464a86f8d36" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/c7097ebe-23a3-4679-9a88-e464a86f8d36</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">472</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/webp</td>
+        <td style="text-align:right;font-weight:500">49328</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/ea52d2f3-aa5f-441f-a26b-85199e62a962" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/ea52d2f3-aa5f-441f-a26b-85199e62a962</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">342</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/webp</td>
+        <td style="text-align:right;font-weight:500">38058</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/1d3abfc8-0387-4f73-8083-4eab056c2a4f" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/1d3abfc8-0387-4f73-8083-4eab056c2a4f</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">333</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/webp</td>
+        <td style="text-align:right;font-weight:500">52084</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/3eb39603-9e08-4d66-aea9-7ff30870a97f" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/3eb39603-9e08-4d66-aea9-7ff30870a97f</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">790</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">19735</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/b7b325a7-754c-47a2-b968-7053ee2614fe.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/b7b325a7-754c-47a2-b968-7053ee2614fe.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">330</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">50208</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/7b397f1d-1e25-44c5-a2e6-67399cb88b42.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/7b397f1d-1e25-44c5-a2e6-67399cb88b42.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">520</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">34386</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/e79c7c4c-1adb-4976-a869-4cba4f955127.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/e79c7c4c-1adb-4976-a869-4cba4f955127.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">326</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">47372</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/79e327c4-0226-428e-a2e5-98ab05be92ac.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/79e327c4-0226-428e-a2e5-98ab05be92ac.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">566</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">52599</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/4dbdad46-6848-493f-ae58-cd16498949a4.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/4dbdad46-6848-493f-ae58-cd16498949a4.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">372</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">78485</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/8b0a0757-c232-4c84-899f-6fbaaece90ce.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/8b0a0757-c232-4c84-899f-6fbaaece90ce.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">386</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">24496</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/8ec87b6b-fc07-4160-a50b-1df110022dad.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/8ec87b6b-fc07-4160-a50b-1df110022dad.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">557</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">55677</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/0749dae9-b899-4c71-bb12-f54bd70c688e.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/0749dae9-b899-4c71-bb12-f54bd70c688e.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">562</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">57356</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/0334ce47-e8ba-46be-9538-5902d06a70c8.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/0334ce47-e8ba-46be-9538-5902d06a70c8.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">652</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">33482</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/99b7054f-151b-401f-9aa4-ca8dd38efa33.jpg" target="_blank">https://gumtreeau-res.cloudinary.com/image/private/t_$_s-l400/gumtree/99b7054f-151b-401f-9aa4-ca8dd38efa33.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">497</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/gif</td>
+        <td style="text-align:right;font-weight:500">0</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">611</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">text/plain; charset=utf-8</td>
+        <td style="text-align:right;font-weight:500">9</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">502</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/gif</td>
+        <td style="text-align:right;font-weight:500">0</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/gumtree/2df77e73-6973-451b-b24b-daecfc727def.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">383</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/png</td>
+        <td style="text-align:right;font-weight:500">501047</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/s--lY0wBmZo--/t_$_35/gumtree/services_for_hire_minion.png" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/s--lY0wBmZo--/t_$_35/gumtree/services_for_hire_minion.png</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">564</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/png</td>
+        <td style="text-align:right;font-weight:500">1497354</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/s--lY0wBmZo--/v1769128758/gumtree/services_for_hire_minion.png" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/s--lY0wBmZo--/v1769128758/gumtree/services_for_hire_minion.png</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">609</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">29202</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/gumtree/90507bb2-0a90-4678-a7e1-220200a5dec5.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/gumtree/90507bb2-0a90-4678-a7e1-220200a5dec5.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">592</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">1733</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_26/gumtree/d5c0abf5-e0d3-4f26-9a1b-4e109eb6e76d.jpg" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_26/gumtree/d5c0abf5-e0d3-4f26-9a1b-4e109eb6e76d.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">567</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">13511</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/move/838da094-f299-4c7e-bbe4-cc28d8a0954c" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/move/838da094-f299-4c7e-bbe4-cc28d8a0954c</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">755</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">13511</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/move/5bbb5da3-23b6-47e9-ae09-273cc8f6d483" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l400/move/5bbb5da3-23b6-47e9-ae09-273cc8f6d483</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">737</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">7253</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/838da094-f299-4c7e-bbe4-cc28d8a0954c" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/838da094-f299-4c7e-bbe4-cc28d8a0954c</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">617</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">1051</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/838da094-f299-4c7e-bbe4-cc28d8a0954c" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/838da094-f299-4c7e-bbe4-cc28d8a0954c</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">636</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">2952</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_74/move/15cd70e1-70a8-4af4-9ceb-85e8ef502c3b" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_74/move/15cd70e1-70a8-4af4-9ceb-85e8ef502c3b</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">590</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">1011</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/15cd70e1-70a8-4af4-9ceb-85e8ef502c3b" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/15cd70e1-70a8-4af4-9ceb-85e8ef502c3b</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">595</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">7253</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/5bbb5da3-23b6-47e9-ae09-273cc8f6d483" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/5bbb5da3-23b6-47e9-ae09-273cc8f6d483</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">874</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">1051</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/5bbb5da3-23b6-47e9-ae09-273cc8f6d483" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/5bbb5da3-23b6-47e9-ae09-273cc8f6d483</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">479</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">2952</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_74/move/22a9987d-ce74-49ee-9fcd-f055eabe5da2" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_74/move/22a9987d-ce74-49ee-9fcd-f055eabe5da2</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">585</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">1011</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/22a9987d-ce74-49ee-9fcd-f055eabe5da2" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/22a9987d-ce74-49ee-9fcd-f055eabe5da2</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">628</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">7253</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/b78c99be-7ec0-4f67-8a3c-5dc99137452e" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/b78c99be-7ec0-4f67-8a3c-5dc99137452e</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">733</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">1051</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/b78c99be-7ec0-4f67-8a3c-5dc99137452e" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/b78c99be-7ec0-4f67-8a3c-5dc99137452e</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">478</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">2952</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_74/move/66608679-ffe3-448a-9b5a-e0c6df1e5ff4" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_74/move/66608679-ffe3-448a-9b5a-e0c6df1e5ff4</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">611</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">1011</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/66608679-ffe3-448a-9b5a-e0c6df1e5ff4" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/66608679-ffe3-448a-9b5a-e0c6df1e5ff4</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">594</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">7253</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/cb2ce7e7-8157-4768-a9c6-7847bf845b88" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/cb2ce7e7-8157-4768-a9c6-7847bf845b88</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">910</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">1051</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/cb2ce7e7-8157-4768-a9c6-7847bf845b88" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/cb2ce7e7-8157-4768-a9c6-7847bf845b88</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">493</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">2952</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_74/move/e1235165-6542-454e-9472-b6e366843ac1" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_74/move/e1235165-6542-454e-9472-b6e366843ac1</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">628</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">2799</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_74/move/05b0e24f-e3ec-4917-96e5-472c34deb4e0" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_74/move/05b0e24f-e3ec-4917-96e5-472c34deb4e0</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">703</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">1011</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/e1235165-6542-454e-9472-b6e366843ac1" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/e1235165-6542-454e-9472-b6e366843ac1</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">665</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">953</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/05b0e24f-e3ec-4917-96e5-472c34deb4e0" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_14/move/05b0e24f-e3ec-4917-96e5-472c34deb4e0</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">399</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">52354</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_58/move/838da094-f299-4c7e-bbe4-cc28d8a0954c" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_58/move/838da094-f299-4c7e-bbe4-cc28d8a0954c</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">652</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">145694</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l1600/move/838da094-f299-4c7e-bbe4-cc28d8a0954c" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_s-l1600/move/838da094-f299-4c7e-bbe4-cc28d8a0954c</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">874</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">22740</td>
+        <td class="url-cell font-mono">
+          <a href="https://carsguide-dev-res.cloudinary.com/image/upload/c_scale,f_auto,t_cg_base,w_426/v1/editorial/segment_review/hero_image/2024-mazda-3-evolve-SP-G25-TN.jpg" target="_blank">https://carsguide-dev-res.cloudinary.com/image/upload/c_scale,f_auto,t_cg_base,w_426/v1/editorial/segment_review/hero_image/2024-mazda-3-evolve-SP-G25-TN.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">870</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">22785</td>
+        <td class="url-cell font-mono">
+          <a href="https://carsguide-dev-res.cloudinary.com/image/upload/c_scale,f_auto,t_cg_base,w_426/v1/editorial/Agar-Mazda-3-website-thumb-1.jpg" target="_blank">https://carsguide-dev-res.cloudinary.com/image/upload/c_scale,f_auto,t_cg_base,w_426/v1/editorial/Agar-Mazda-3-website-thumb-1.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">886</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">13815</td>
+        <td class="url-cell font-mono">
+          <a href="https://carsguide-dev-res.cloudinary.com/image/upload/c_scale,f_auto,t_cg_base,w_426/v1/editorial/2026-Mazda-Vision-Compact-X-Concept-1001x565-2.jpg" target="_blank">https://carsguide-dev-res.cloudinary.com/image/upload/c_scale,f_auto,t_cg_base,w_426/v1/editorial/2026-Mazda-Vision-Compact-X-Concept-1001x565-2.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">714</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">7253</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/5bbb5da3-23b6-47e9-ae09-273cc8f6d483" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/5bbb5da3-23b6-47e9-ae09-273cc8f6d483</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">422</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">9305</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/2278699a-6d3c-4139-bcd1-3ff3f7b18114" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/2278699a-6d3c-4139-bcd1-3ff3f7b18114</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">932</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">7253</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/838da094-f299-4c7e-bbe4-cc28d8a0954c" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/838da094-f299-4c7e-bbe4-cc28d8a0954c</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1110</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">13511</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/move/838da094-f299-4c7e-bbe4-cc28d8a0954c" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/move/838da094-f299-4c7e-bbe4-cc28d8a0954c</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">422</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">62310</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_20/move/838da094-f299-4c7e-bbe4-cc28d8a0954c" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_20/move/838da094-f299-4c7e-bbe4-cc28d8a0954c</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">431</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">8727</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/15cd70e1-70a8-4af4-9ceb-85e8ef502c3b" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_35/move/15cd70e1-70a8-4af4-9ceb-85e8ef502c3b</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">426</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">35412</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/move/15cd70e1-70a8-4af4-9ceb-85e8ef502c3b" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_75/move/15cd70e1-70a8-4af4-9ceb-85e8ef502c3b</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">426</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">76522</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_20/move/15cd70e1-70a8-4af4-9ceb-85e8ef502c3b" target="_blank">https://gumtreeau-dev-res.cloudinary.com/image/private/t_$_20/move/15cd70e1-70a8-4af4-9ceb-85e8ef502c3b</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">Cloudinary</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">868</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">13511</td>
+        <td class="url-cell font-mono">
+          <a href="https://gumtreeau%2Ddev%2Dres.cloudinary.com/image/private/t_$_75/move/838da094%2Df299%2D4c7e%2Dbbe4%2Dcc28d8a0954c" target="_blank">https://gumtreeau%2Ddev%2Dres.cloudinary.com/image/private/t_$_75/move/838da094%2Df299%2D4c7e%2Dbbe4%2Dcc28d8a0954c</a>
+        </td>
+      </tr>
+    
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>🟢 GTAU Images - HTTP Sanity Checks</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Status</th>
+            <th>Latency (ms)</th>
+            <th>Content-Type</th>
+            <th style="text-align:right">Content-Length</th>
+            <th>URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">332</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">17129</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_s-l400/gumtree/ada40cbf-c1d6-4733-bd38-d3d0cb0f2e7c.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_s-l400/gumtree/ada40cbf-c1d6-4733-bd38-d3d0cb0f2e7c.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">190</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:63%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">25374</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_s-l400/gumtree/357d28b9-c750-4a9e-81ba-300249cc2236.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_s-l400/gumtree/357d28b9-c750-4a9e-81ba-300249cc2236.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">413</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">7152</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/332455c6-acaa-4583-8fbd-394bcc089208.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">596</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">1526</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_74/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_74/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">518</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">3033</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_74/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_74/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">200</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:67%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">7207</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/5926fd9a-341e-4d29-852d-f8a35a3c8fac.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">193</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:64%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">9541</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/eaf4b0b8-abb4-494b-973b-4aa45edc6bd5.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">628</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">12119</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/35456ba9-5b6e-4239-a297-aa1d2eb0ba9f.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/35456ba9-5b6e-4239-a297-aa1d2eb0ba9f.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">319</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">8913</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/35456ba9-5b6e-4239-a297-aa1d2eb0ba9f.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/35456ba9-5b6e-4239-a297-aa1d2eb0ba9f.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">600</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">14873</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/459a9208-94f2-4d99-8cab-4a045b55cbc8.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/459a9208-94f2-4d99-8cab-4a045b55cbc8.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">375</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">8913</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/459a9208-94f2-4d99-8cab-4a045b55cbc8.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/459a9208-94f2-4d99-8cab-4a045b55cbc8.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">683</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">14873</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/add4d9e9-7158-4d1e-bbf3-14bfb5f3458d.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/add4d9e9-7158-4d1e-bbf3-14bfb5f3458d.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1031</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">8913</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/add4d9e9-7158-4d1e-bbf3-14bfb5f3458d.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/add4d9e9-7158-4d1e-bbf3-14bfb5f3458d.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">195</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:65%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">14873</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/ba207147-142e-4489-8d6e-0930ca5f42ef.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/ba207147-142e-4489-8d6e-0930ca5f42ef.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">740</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">8913</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/ba207147-142e-4489-8d6e-0930ca5f42ef.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/ba207147-142e-4489-8d6e-0930ca5f42ef.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">355</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">8120</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/f9ba077f-7352-4943-8cc6-1aa2a16d1dda.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/f9ba077f-7352-4943-8cc6-1aa2a16d1dda.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1388</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">9407</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/f9ba077f-7352-4943-8cc6-1aa2a16d1dda.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/f9ba077f-7352-4943-8cc6-1aa2a16d1dda.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">836</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">12119</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/b9d5fd79-6362-46aa-87d2-be55297e7f65.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_75/gumtree/b9d5fd79-6362-46aa-87d2-be55297e7f65.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">528</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">8913</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/b9d5fd79-6362-46aa-87d2-be55297e7f65.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/b9d5fd79-6362-46aa-87d2-be55297e7f65.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">309</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">12119</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_s-l400/gumtree/0f1c6835-a252-4ef1-99dd-f0309186a851.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_s-l400/gumtree/0f1c6835-a252-4ef1-99dd-f0309186a851.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">171</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:57%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">1059</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_s-l96/gumtree/00abfebe-aed8-4348-99bf-bbcc883698e9.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_s-l96/gumtree/00abfebe-aed8-4348-99bf-bbcc883698e9.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1008</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">7366</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/0f1c6835-a252-4ef1-99dd-f0309186a851.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_35/gumtree/0f1c6835-a252-4ef1-99dd-f0309186a851.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1407</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">2896</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_26/gumtree/00abfebe-aed8-4348-99bf-bbcc883698e9.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_26/gumtree/00abfebe-aed8-4348-99bf-bbcc883698e9.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">972</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/jpeg</td>
+        <td style="text-align:right;font-weight:500">2896</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_26/gumtree/77f5499e-3194-4bed-a797-637ac6c0cbf5.jpg" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_26/gumtree/77f5499e-3194-4bed-a797-637ac6c0cbf5.jpg</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-ok">200</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">1332</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">image/png</td>
+        <td style="text-align:right;font-weight:500">5123</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_26/gumtree/1805f89c-e609-432b-9852-1b5e48eeb58c.png" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_26/gumtree/1805f89c-e609-432b-9852-1b5e48eeb58c.png</a>
+        </td>
+      </tr>
+    
+      <tr>
+        <td style="font-weight:600">GTAU Images</td>
+        <td><span class="badge badge-bad">404</span></td>
+        <td>
+          <div class="latency-wrapper">
+            <span class="latency-val">530</span>
+            <div class="latency-bar-bg">
+              <div class="latency-bar-fill" style="width:100%"></div>
+            </div>
+          </div>
+        </td>
+        <td class="font-mono" style="font-size:0.8rem">text/html</td>
+        <td style="text-align:right;font-weight:500">14</td>
+        <td class="url-cell font-mono">
+          <a href="https://images.staging.p.nonprod.gtau.net/image/private/t_$_26/move/3efe630f-88f8-46a5-a2e9-d5c0b9fc6680_26.JPG" target="_blank">https://images.staging.p.nonprod.gtau.net/image/private/t_$_26/move/3efe630f-88f8-46a5-a2e9-d5c0b9fc6680_26.JPG</a>
+        </td>
+      </tr>
+    
+        </tbody>
+      </table>
+    </section>
+  </div>
+</body>
+</html>

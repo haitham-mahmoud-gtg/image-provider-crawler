@@ -34,6 +34,10 @@ const urls = fs.readFileSync(path.join(__dirname, "..", "urls.txt"), "utf8")
             domGtauImages: dom.gtauImages,
             reqCloudinary: result.network.cloudinary,
             reqGtauImages: result.network.gtauImages,
+            headerCloudinary: dom.header.cloudinary,
+            headerGtauImages: dom.header.gtauImages,
+            bodyCloudinary: dom.body.cloudinary,
+            bodyGtauImages: dom.body.gtauImages,
             dom, // Keep for sanity checks
             error: null,
           };
@@ -45,7 +49,11 @@ const urls = fs.readFileSync(path.join(__dirname, "..", "urls.txt"), "utf8")
             domGtauImages: [],
             reqCloudinary: [],
             reqGtauImages: [],
-            dom: { cloudinary: [], gtauImages: [] },
+            headerCloudinary: [],
+            headerGtauImages: [],
+            bodyCloudinary: [],
+            bodyGtauImages: [],
+            dom: { cloudinary: [], gtauImages: [], header: { cloudinary: [], gtauImages: [] }, body: { cloudinary: [], gtauImages: [] } },
             error: error.message,
           };
         }

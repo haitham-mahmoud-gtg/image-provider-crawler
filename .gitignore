@@ -4,6 +4,7 @@ package-lock.json
 
 # Generated reports
 image-provider-crawler/report.html
+image-provider-crawler/report-auth.html
 
 # Logs
 *.log
